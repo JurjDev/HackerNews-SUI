@@ -16,12 +16,3 @@ struct NewsListView: View {
         }
     }
 }
-
-#Preview {
-    let item = StoryModel(id: "",
-                          title: "",
-                          author: "",
-                          createdAt: .now,
-                          stringURL: "")
-    return NewsListView(news: [item])
-}
