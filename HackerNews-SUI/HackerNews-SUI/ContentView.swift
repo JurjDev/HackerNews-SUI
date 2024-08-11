@@ -16,15 +16,14 @@ struct ContentView: View {
             switch viewModel.state {
             case .loading:
                 ProgressView()
-            case .ready:
+            case .ready,
+                 .error:
                 NewsListView(news: viewModel.items)
                     .refreshable {
                         Task {
                             await viewModel.fetchNews(forceCache: true)
                         }
                     }
-            case .error:
-                Text("Error")
             }
         }
         .onAppear {
