@@ -42,3 +42,26 @@ extension Constants.Icons {
         }
     }
 }
+
+// MARK: - Time
+extension Constants {
+    enum Time {
+        case days
+        case yesterday
+        case hours
+        case minutes
+        case seconds
+    }
+}
+
+extension Constants.Time {
+    var value: String {
+        switch self {
+        case .days: return "%d days ago"
+        case .yesterday: return "yesterday"
+        case .hours: return "%dh"
+        case .minutes: return "%dm"
+        case .seconds: return "%ds"
+        }
+    }
+}

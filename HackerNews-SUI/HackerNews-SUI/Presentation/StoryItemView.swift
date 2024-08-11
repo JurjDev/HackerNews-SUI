@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StoryItemView: View {
-    let item: StoryItemModel
+    let item: StoryModel
     @State
     private var isPresenting: Bool = false
     @State
@@ -35,7 +35,7 @@ struct StoryItemView: View {
         }
         .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
-                item.deleteAction?()
+                item.isVisible = false
             } label: {
                 Label(Constants.Strings.ListDeleteText.value,
                       systemImage: Constants.Icons.trashIcon.value)
@@ -55,5 +55,10 @@ struct StoryItemView: View {
 }
 
 #Preview {
-    return StoryItemView(item: StoryItemModel.mockItem)
+    let item = StoryModel(id: "",
+                          title: "",
+                          author: "",
+                          createdAt: .now,
+                          stringURL: "")
+    return StoryItemView(item: item)
 }

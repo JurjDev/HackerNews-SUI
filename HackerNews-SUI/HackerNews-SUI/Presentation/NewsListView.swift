@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct NewsListView: View {
-    var news: [StoryItemModel]
+    var news: [StoryModel]
 
     var body: some View {
         List(news) { element in
             StoryItemView(item: element)
         }
-        .refreshable {
-            news = StoryItemModel.mockItems
-        }
     }
 }
 
 #Preview {
-    NewsListView(news: StoryItemModel.mockItems)
+    let item = StoryModel(id: "",
+                          title: "",
+                          author: "",
+                          createdAt: .now,
+                          stringURL: "")
+    return NewsListView(news: [item])
 }

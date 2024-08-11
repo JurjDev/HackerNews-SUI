@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject
+    var viewModel: NewsViewModel = NewsViewModel()
+
     var body: some View {
-        NewsListView(news: StoryItemModel.mockItems)
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .ready:
+                NewsListView(news: viewModel.items)
+                    .refreshable {
+                        Task {
+                            await viewModel.fetchNews(forceCache: true)
+                        }
+                    }
+            case .error:
+                Text("Error")
+            }
+        }
+        .onAppear {
+            Task {
+                await viewModel.fetchNews(forceCache: false)
+            }
+        }
     }
 }
 
